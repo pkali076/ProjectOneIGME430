@@ -1,0 +1,30 @@
+{
+  "name": "projectoneigme430",
+  "version": "1.0.0",
+  "engines":{
+    "node":"16.13.2",
+    "npm":"8.5.1"
+  },
+  "description": "Project One IGME 430",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pkali076/ProjectOneIGME430.git"
+  },
+  "author": "PHILIP KALINOWSKI",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/pkali076/ProjectOneIGME430/issues"
+  },
+  "homepage": "https://github.com/pkali076/ProjectOneIGME430#readme",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}
