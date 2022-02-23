@@ -44,7 +44,7 @@
       const month = recipeForm.querySelector("#monthField").value;
       const meal = recipeForm.querySelector("#mealField").value;
 
-      const formData = `name=${recipe}&date=${date}&month=${month}&meal=${meal}`;
+      const formData = `recipe=${recipe}&date=${date}&month=${month}&meal=${meal}`;
       const response = await fetch('/addRecipe', {
         method:'POST',
         headers:{
@@ -133,9 +133,9 @@
     
       <div class="column is-one-fifth">
         <form id="addRecipeForm" action="/addRecipe" method="post" class="py-2">
-          <label for="name">Name of Recipe: </label>
+          <label for="recipe">Name of Recipe: </label>
 
-          <input class="input is-primary" placeholder="e.g. Pasta" id="recipeField" type="text" name="name" /><br>
+          <input class="input is-primary" placeholder="e.g. Pasta" id="recipeField" type="text" name="recipe" /><br>
           <label for="date">Month: </label>
 
           <div class="field">
