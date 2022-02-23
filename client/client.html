@@ -41,8 +41,10 @@
     const sendPost = async (recipeForm) => {
       const recipe = recipeForm.querySelector("#recipeField").value;
       const date = recipeForm.querySelector("#dateField").value;
+      const month = recipeForm.querySelector("#monthField").value;
+      const meal = recipeForm.querySelector("#mealField").value;
 
-      const formData = `name=${recipe}&age=${date}`;
+      const formData = `name=${recipe}&date=${date}&month=${month}&meal=${meal}`;
       const response = await fetch('/addRecipe', {
         method:'POST',
         headers:{
@@ -59,6 +61,7 @@
       //url and method from html form below
       const url = recipeForm.querySelector("#urlField").value;
       const method = recipeForm.querySelector("#methodSelect").value;
+
       
 
       //await fetch response, go to URL use the right method and attach headers
@@ -131,10 +134,51 @@
       <div class="column is-one-fifth">
         <form id="addRecipeForm" action="/addRecipe" method="post" class="py-2">
           <label for="name">Name of Recipe: </label>
+
           <input class="input is-primary" placeholder="e.g. Pasta" id="recipeField" type="text" name="name" /><br>
-          <label for="date">Date to Make: </label>
+          <label for="date">Month: </label>
+
+          <div class="field">
+            <p class="control">
+              <span class="select">
+                <select id='monthField'>
+                  <option value='January'>January</option>
+                  <option value='February'>February</option>
+                  <option value='March'>March</option>
+                  <option value='April'>April</option>
+                  <option value='May'>May</option>
+                  <option value='June'>June</option>
+                  <option value='July'>July</option>
+                  <option value='August'>August</option>
+                  <option value='September'>September</option>
+                  <option value='October'>October</option>
+                  <option value='November'>November</option>
+                  <option value='December'>December</option>
+                </select>
+              </span>
+            </p>
+          </div>
+
+          <label for="date">Meal Type: </label>
+          <div class="field">
+            <p class="control">
+              <span class="select">
+                <select id='mealField'>
+                  <option value='Appetizer'>Appetizer</option>
+                  <option value='Breakfast'>Breakfast</option>
+                  <option value='Lunch'>Lunch</option>
+                  <option value='Dinner'>Dinner</option>
+                  <option value='Snack'>Snack</option>
+                </select>
+              </span>
+            </p>
+          </div>
+
+          <!-- make this a drop down? -->
+
+          <label for="date">Time: </label>
           <input class="input is-primary" placeholder="e.g. 2022" id="dateField" type="number" name="date" min="2021" max="2025" step="1"/>
-          <input class="button is-warning" type="submit" value="Add Recipe" />
+          <input class="button is-warning mt-4 mb-4" type="submit" value="Add Recipe" />
         </form>
       </div> <!-- end container div-->
 
@@ -150,6 +194,7 @@
               </span>
             </p>
           </div>
+
 
       <!-- <select id='urlField'>
         <option value='/getRecipes'>/getRecipes</option>
@@ -172,6 +217,7 @@
       </select> -->
           <input class="button is-warning" type="submit" value="Get Recipe" />
         </form>
+        </div>
       </div>
 
   </section>
@@ -180,8 +226,8 @@
   <footer class="footer">
     <div class="content">
       <p>
-        Developed by <strong><a>Philip Kalinowski</a></strong>.The source code is licensed
-        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        Developed by <strong><a href="https://www.linkedin.com/in/philip-kalinowski427/">Philip Kalinowski</a></strong>. <br>The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. <br>The website content
         is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
       </p>
     </div>
