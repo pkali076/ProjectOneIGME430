@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Our simple HTTP server</title>
+  <title>Simple Recipe Creator</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
@@ -38,12 +38,12 @@
       }
     };
 
-    const sendPost = async (nameForm) => {
-      const name = nameForm.querySelector("#nameField").value;
-      const age = nameForm.querySelector("#ageField").value;
+    const sendPost = async (recipeForm) => {
+      const recipe = recipeForm.querySelector("#recipeField").value;
+      const date = recipeForm.querySelector("#dateField").value;
 
-      const formData = `name=${name}&age=${age}`;
-      const response = await fetch('/addUser', {
+      const formData = `name=${recipe}&age=${date}`;
+      const response = await fetch('/addRecipe', {
         method:'POST',
         headers:{
           'Content-Type':'application/x-www-form-urlencoded',
@@ -55,10 +55,10 @@
       handleResponse(response);
     };
 
-    const requestUpdate = async (userForm) => {
+    const requestUpdate = async (recipeForm) => {
       //url and method from html form below
-      const url = userForm.querySelector("#urlField").value;
-      const method = userForm.querySelector("#methodSelect").value;
+      const url = recipeForm.querySelector("#urlField").value;
+      const method = recipeForm.querySelector("#methodSelect").value;
       
 
       //await fetch response, go to URL use the right method and attach headers
@@ -76,49 +76,80 @@
 
     const init = () => {
       //form
-      const userForm = document.querySelector("#userForm");
-      const nameForm = document.querySelector("#nameForm");
+      const getRecipeForm = document.querySelector("#getRecipeForm");
+      const addRecipeForm = document.querySelector("#addRecipeForm");
 
-      const addUsers = (e) => {
+      const addRecipe = (e) => {
         e.preventDefault();
-        sendPost(nameForm);
+        sendPost(addRecipeForm);
         return false;
       }
 
-      const getUsers = (e) => {
+      const getRecipes = (e) => {
         e.preventDefault();
-        requestUpdate(userForm);
+        requestUpdate(getRecipeForm);
         return false;
       }
 
-      userForm.addEventListener('submit', getUsers);
-      nameForm.addEventListener('submit', addUsers);
+      getRecipeForm.addEventListener('submit', getRecipes);
+      addRecipeForm.addEventListener('submit', addRecipe);
     };
 
     window.onload = init;
 
   </script>
+
+
+
+<!-- framework of the page (HTML5)-->
+
+
 </head>
 <body>
-  <section id="top">
-    <h3>POST Status Code Tests</h3>
-    <form id="nameForm" action="/addUser" method="post">
-      <label for="name">Name: </label>
-      <input id="nameField" type="text" name="name" />
-      <label for="age">Age: </label>
-      <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
-      <input type="submit" value="Add User" />
+  <section class="has-text-centered" id="top">
+
+    <h3 class="title">Recipe Creator</h3>
+
+
+    <form id="addRecipeForm" action="/addRecipe" method="post">
+      <label for="name">Name of Recipe: </label>
+      <input id="recipeField" type="text" name="name" /><br>
+      <label for="date">Date to Make: </label>
+      <input id="dateField" type="number" name="date" min="2021" max="2025" step="1"/>
+      <input type="submit" value="Add Recipe" />
     </form>
-    <form id="userForm" action="/getUsers" method="get">
-      <select id='urlField'>
-        <option value='/getUsers'>/getUsers</option>
+
+
+    <form id="getRecipeForm" action="/getRecipes" method="get">
+      <div class="field">
+        <p class="control">
+          <span class="select">
+            <select id='urlField'>
+              <option value='/getRecipes'>/getRecipes</option>
+              <option value='/notReal'>/notReal</option>
+            </select>
+          </span>
+        </p>
+      </div>
+      <!-- <select id='urlField'>
+        <option value='/getRecipes'>/getRecipes</option>
         <option value='/notReal'>/notReal</option>
-      </select>
-      <select id="methodSelect">
-        <option value="get">GET</option>
-        <option value="head">HEAD</option>
-      </select>
-      <input type="submit" value="Get User" />
+      </select> -->
+      <div class="field">
+        <p class="control">
+          <span class="select">
+            <select id="methodSelect">
+              <option value="get">Get Recipe</option>
+              <option value="head">Check existence of Recipe</option>
+            </select>
+          </span>
+        </p>
+      </div>
+      <!-- <select id="methodSelect">
+        <option value="get">Find Recipe</option>
+        <option value="head">Check existence of Recipe</option>
+      </select> -->
+      <input type="submit" value="Get Recipe" />
     </form>
   </section>
   <section id="content">

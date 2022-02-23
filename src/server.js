@@ -37,9 +37,9 @@ const parseBody = (request, response, handler) => {
 
 // handle POST requests
 const handlePost = (request, response, parsedURL) => {
-  if (parsedURL.pathname === '/addUser') {
+  if (parsedURL.pathname === '/addRecipe') {
     // parses bodywith jsonHandler function as handler callback function
-    parseBody(request, response, jsonHandler.addUser);
+    parseBody(request, response, jsonHandler.addRecipe);
   }
 };
 
@@ -60,13 +60,13 @@ const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
     '/style.css': htmlHandler.getCSS,
-    '/getUsers': jsonHandler.getUsers,
-    '/addUser': jsonHandler.addUser,
-    '/updateUser': jsonHandler.updateUser,
+    '/getRecipes': jsonHandler.getRecipes,
+    '/addRecipe': jsonHandler.addRecipe,
+    '/updateUser': jsonHandler.updateRecipe,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
-    '/getUsers': jsonHandler.getUsersMeta,
+    '/getRecipes': jsonHandler.getUsersMeta,
     notFound: jsonHandler.notFoundMeta,
   },
 };
