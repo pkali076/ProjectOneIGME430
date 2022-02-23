@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Simple Recipe Creator</title>
+  <title>Recipe Creator</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
@@ -76,8 +76,8 @@
 
     const init = () => {
       //form
-      const getRecipeForm = document.querySelector("#getRecipeForm");
       const addRecipeForm = document.querySelector("#addRecipeForm");
+      const getRecipeForm = document.querySelector("#getRecipeForm");
 
       const addRecipe = (e) => {
         e.preventDefault();
@@ -91,8 +91,9 @@
         return false;
       }
 
-      getRecipeForm.addEventListener('submit', getRecipes);
       addRecipeForm.addEventListener('submit', addRecipe);
+      getRecipeForm.addEventListener('submit', getRecipes);
+      
     };
 
     window.onload = init;
@@ -106,54 +107,85 @@
 
 </head>
 <body>
-  <section class="has-text-centered" id="top">
+  <nav class="navbar is-warning has-shadow">
+    <div class="navbar-brand">
+    <a class="navbar-item">
+      <img alt="logo" style="max-height:70px" class="py-2 px-2">
+    </a>
+  </div>
+  <div class="navbar-menu" id="nav-links">
+    <div class="navbar-start">
+      <a class="navbar-item">About</a>
+      <a class="navbar-item">Recipe App</a>
+      <!-- <a class="navbar-item">Documentation</a> -->
+    </div>
+
+  </div>
+  </nav>
+  <section class="hero is-info is-medium" id="top">
 
     <h3 class="title">Recipe Creator</h3>
 
+    <div class="columns hero-body">
+    
+      <div class="column is-one-fifth">
+        <form id="addRecipeForm" action="/addRecipe" method="post" class="py-2">
+          <label for="name">Name of Recipe: </label>
+          <input class="input is-primary" placeholder="e.g. Pasta" id="recipeField" type="text" name="name" /><br>
+          <label for="date">Date to Make: </label>
+          <input class="input is-primary" placeholder="e.g. 2022" id="dateField" type="number" name="date" min="2021" max="2025" step="1"/>
+          <input class="button is-warning" type="submit" value="Add Recipe" />
+        </form>
+      </div> <!-- end container div-->
 
-    <form id="addRecipeForm" action="/addRecipe" method="post">
-      <label for="name">Name of Recipe: </label>
-      <input id="recipeField" type="text" name="name" /><br>
-      <label for="date">Date to Make: </label>
-      <input id="dateField" type="number" name="date" min="2021" max="2025" step="1"/>
-      <input type="submit" value="Add Recipe" />
-    </form>
+      <div class="column is-one-third">
+        <form id="getRecipeForm" action="/getRecipes" method="get">
+          <div class="field">
+            <p class="control">
+              <span class="select">
+                <select id='urlField'>
+                  <option value='/getRecipes'>/getRecipes</option>
+                  <option value='/notReal'>/notReal</option>
+                </select>
+              </span>
+            </p>
+          </div>
 
-
-    <form id="getRecipeForm" action="/getRecipes" method="get">
-      <div class="field">
-        <p class="control">
-          <span class="select">
-            <select id='urlField'>
-              <option value='/getRecipes'>/getRecipes</option>
-              <option value='/notReal'>/notReal</option>
-            </select>
-          </span>
-        </p>
-      </div>
       <!-- <select id='urlField'>
         <option value='/getRecipes'>/getRecipes</option>
         <option value='/notReal'>/notReal</option>
       </select> -->
-      <div class="field">
-        <p class="control">
-          <span class="select">
-            <select id="methodSelect">
-              <option value="get">Get Recipe</option>
-              <option value="head">Check existence of Recipe</option>
-            </select>
-          </span>
-        </p>
-      </div>
+          <div class="field">
+            <p class="control">
+              <span class="select">
+                <select id="methodSelect">
+                  <option value="get">See Recipe Entry</option>
+                  <option value="head">Check for Recipe Entry</option>
+                </select>
+              </span>
+            </p>
+          </div>
+
       <!-- <select id="methodSelect">
         <option value="get">Find Recipe</option>
         <option value="head">Check existence of Recipe</option>
       </select> -->
-      <input type="submit" value="Get Recipe" />
-    </form>
+          <input class="button is-warning" type="submit" value="Get Recipe" />
+        </form>
+      </div>
+
   </section>
   <section id="content">
   </section>
+  <footer class="footer">
+    <div class="content">
+      <p>
+        Developed by <strong><a>Philip Kalinowski</a></strong>.The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
 

@@ -1,2 +1,34 @@
 @charset "utf-8";
-@import "../node_modules/bulma/bulma.sass";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bitter&family=Vollkorn&display=swap');
+
+//set custom variables
+$arsenic: #333D45;
+$dark-electric-blue: #4D6E7F;
+$ochre:#C5742C;
+$roman-silver:#7E8D9C;
+$pastel-gray:#D5C9BB;
+$russet:#813D18;
+
+//set global variables of bulma
+$family-primary: "Bitter", serif;
+$primary: $roman-silver;
+$success: $ochre;
+$warning: $arsenic;
+$info: $pastel-gray;
+$footer-background-color: $roman-silver;
+
+
+//imports
+
+
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+@import "../node_modules/bulma/sass/base/_all.sass";
+@import "../node_modules/bulma/sass/elements/button.sass";
+@import "../node_modules/bulma/sass/elements/container.sass";
+@import "../node_modules/bulma/sass/elements/title.sass";
+@import "../node_modules/bulma/sass/form/_all.sass";
+@import "../node_modules/bulma/sass/components/navbar.sass";
+@import "../node_modules/bulma/sass/layout/hero.sass";
+@import "../node_modules/bulma/sass/layout/section.sass";

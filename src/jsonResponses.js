@@ -41,7 +41,7 @@ const addRecipe = (request, response, body) => {
     message: 'Recipe name and date to cook are both required',
   };
     // make sure both fields are filled out in textboxes
-  if (!body.recipe || !body.age) {
+  if (!body.recipe || !body.date) {
     responseJSON.id = 'addRecipeMissingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -56,7 +56,7 @@ const addRecipe = (request, response, body) => {
   }
   // add or update fields for this user name
   recipes[body.recipe].recipe = body.recipe;
-  recipes[body.recipe].age = body.age;
+  recipes[body.recipe].date = body.date;
 
   // if response is created, set created message and semd response w/message
   if (responseCode === 201) {
