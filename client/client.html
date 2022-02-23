@@ -7,7 +7,7 @@
   <script>
     const handleResponse = async (response, parseResponse) => {
       //content section to write to it
-      const content = document.querySelector("#content");
+      const content = document.querySelector("#content-recipe");
 
       //based on status of response, write
 
@@ -31,7 +31,14 @@
       if(parseResponse){
         let obj = await response.json();
 
-        let jsonString = JSON.stringify(obj);
+        const keys = Object.keys(obj);
+        const values = Object.values(obj);
+        const realValues = Object.values(values);
+        console.log(keys);
+        console.log(values[0]);
+        console.log(realValues);
+
+        let jsonString = JSON.stringify(realValues);
         content.innerHTML += `<p>${jsonString}</p>`;
       }else{
         content.innerHTML += '<p>Meta Data Received</p>';
@@ -221,7 +228,8 @@
       </div>
 
   </section>
-  <section id="content">
+  <section class="hero is-medium is-primary" id="content-recipe">
+    <p>testtesttesttest</p>
   </section>
   <footer class="footer">
     <div class="content">
