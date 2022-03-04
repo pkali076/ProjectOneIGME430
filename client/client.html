@@ -8,21 +8,22 @@
     const handleResponse = async (response, parseResponse) => {
       //content section to write to it
       const content = document.querySelector("#content-recipe");
+      const nameVariable = document.querySelector("#name-variable");
 
       //based on status of response, write
 
       switch(response.status){
-        case 200:content.innerHTML = `<b>Success</b>`;
+        case 200:content.innerHTML = `<b>Recipe is within the database.</b>`;
         break;
-        case 201:content.innerHTML = `<b>Created</b>`;
+        case 201:content.innerHTML = `<b>Recipe Created.</b>`;
         break;
-        case 204:content.innerHTML = `<b>Updated</b>`;
+        case 204:content.innerHTML = `<b>Recipe Updated.</b>`;
         break;
-        case 400:content.innerHTML = `<b>Bad Request</b>`;
+        case 400:content.innerHTML = `<b>The requested recipe you are looking for is not currently available or within the system.</b>`;
         break;
-        case 404:content.innerHTML = `<b>Resource Not Found</b>`;
+        case 404:content.innerHTML = `<b>The page you are looking for is not found.</b>`;
         break;
-        default:content.innerHTML = `Error code not implemented by the client`;
+        default:content.innerHTML = `<b>Error code not available.</b>`;
         break;
       }
 
@@ -35,23 +36,27 @@
         const values = Object.values(obj);
         const realValues = Object.values(values);
         console.log(keys);
-        console.log(values[0]);
+        console.log("values [0] == ", values[0]);
         console.log(realValues);
 
-        let jsonString = JSON.stringify(realValues);
-        content.innerHTML += `<p>${jsonString}</p>`;
+       let valueString = JSON.stringify(values);
+       let realValueString = JSON.stringify(realValues);
+        content.innerHTML += `Example Value Object Recipes: <p>${obj['recipe']}</p>`;
+        content.innerHTML += `<p>Real Value Strings ${realValueString}</p>`;
+      
       }else{
         content.innerHTML += '<p>Meta Data Received</p>';
       }
     };
 
     const sendPost = async (recipeForm) => {
+      const recipeDetails = recipeForm.querySelector("#recipeDetails").value;
       const recipe = recipeForm.querySelector("#recipeField").value;
       const date = recipeForm.querySelector("#dateField").value;
       const month = recipeForm.querySelector("#monthField").value;
       const meal = recipeForm.querySelector("#mealField").value;
 
-      const formData = `recipe=${recipe}&date=${date}&month=${month}&meal=${meal}`;
+      const formData = `recipeDetails=${recipeDetails}&recipe=${recipe}&date=${date}&month=${month}&meal=${meal}`;
       const response = await fetch('/addRecipe', {
         method:'POST',
         headers:{
@@ -68,8 +73,6 @@
       //url and method from html form below
       const url = recipeForm.querySelector("#urlField").value;
       const method = recipeForm.querySelector("#methodSelect").value;
-
-      
 
       //await fetch response, go to URL use the right method and attach headers
       let response = await fetch(url, {
@@ -111,10 +114,7 @@
   </script>
 
 
-
 <!-- framework of the page (HTML5)-->
-
-
 </head>
 <body>
   <nav class="navbar is-warning has-shadow">
@@ -132,17 +132,22 @@
 
   </div>
   </nav>
-  <section class="hero is-info is-medium" id="top">
-
+ <section class="hero is-info is-medium" id="top">
     <h3 class="title">Recipe Creator</h3>
+    <section class="hero is-medium is-primary" id="content-recipe">
+      <p>test</p>
+    </section>
 
     <div class="columns hero-body">
-    
-      <div class="column is-one-fifth">
+      <div class="column is-one-fifth-desktop">
         <form id="addRecipeForm" action="/addRecipe" method="post" class="py-2">
+          <div class="column is-one-fifth-desktop">
+            <textarea class="textarea is-primary" id="recipeDetails" placeholder="enter recipe for selected dish"></textarea>
+          </div>
+
           <label for="recipe">Name of Recipe: </label>
 
-          <input class="input is-primary" placeholder="e.g. Pasta" id="recipeField" type="text" name="recipe" /><br>
+          <input class="input is-primary" placeholder="e.g. pasta" id="recipeField" type="text" name="recipe" /><br>
           <label for="date">Month: </label>
 
           <div class="field">
@@ -172,10 +177,10 @@
               <span class="select">
                 <select id='mealField'>
                   <option value='Appetizer'>Appetizer</option>
+                  <option value='Snack'>Snack</option>
                   <option value='Breakfast'>Breakfast</option>
                   <option value='Lunch'>Lunch</option>
                   <option value='Dinner'>Dinner</option>
-                  <option value='Snack'>Snack</option>
                 </select>
               </span>
             </p>
@@ -189,7 +194,8 @@
         </form>
       </div> <!-- end container div-->
 
-      <div class="column is-one-third">
+
+      <div class="column is-one-third-desktop">
         <form id="getRecipeForm" action="/getRecipes" method="get">
           <div class="field">
             <p class="control">
@@ -224,13 +230,10 @@
       </select> -->
           <input class="button is-warning" type="submit" value="Get Recipe" />
         </form>
-        </div>
       </div>
+    </div>
+  </section>
 
-  </section>
-  <section class="hero is-medium is-primary" id="content-recipe">
-    <p>testtesttesttest</p>
-  </section>
   <footer class="footer">
     <div class="content">
       <p>
