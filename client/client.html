@@ -39,11 +39,14 @@
         console.log("values [0] == ", values[0]);
         console.log(realValues);
 
-       let valueString = JSON.stringify(values);
+       // const newObj = JSON.parse(obj);
+
+      // let valueString = JSON.stringify(values);
        let realValueString = JSON.stringify(realValues);
-        content.innerHTML += `Example Value Object Recipes: <p>${obj['recipe']}</p>`;
+      //  let newValueString = JSON.parse(realValueString);
+       // content.innerHTML += `Example Value Object Recipes: <p>${realValueString['recipe'][0]}</p>`;
         content.innerHTML += `<p>Real Value Strings ${realValueString}</p>`;
-      
+
       }else{
         content.innerHTML += '<p>Meta Data Received</p>';
       }
@@ -89,6 +92,10 @@
 
     const init = () => {
       //form
+      const burgerIcon = document.querySelector("#burger");
+      const navbarMenu = document.querySelector("#nav-links");
+
+
       const addRecipeForm = document.querySelector("#addRecipeForm");
       const getRecipeForm = document.querySelector("#getRecipeForm");
 
@@ -106,7 +113,9 @@
 
       addRecipeForm.addEventListener('submit', addRecipe);
       getRecipeForm.addEventListener('submit', getRecipes);
-      
+      burgerIcon.addEventListener('click', () => {
+        navbarMenu.classList.toggle('is-active');
+      })
     };
 
     window.onload = init;
@@ -122,6 +131,11 @@
     <a class="navbar-item">
       <img alt="logo" style="max-height:70px" class="py-2 px-2">
     </a>
+    <a class="navbar-burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
   </div>
   <div class="navbar-menu" id="nav-links">
     <div class="navbar-start">
@@ -135,7 +149,7 @@
  <section class="hero is-info is-medium" id="top">
     <h3 class="title">Recipe Creator</h3>
     <section class="hero is-medium is-primary" id="content-recipe">
-      <p>test</p>
+      <p>Recipe Information Displayed Here After Clicking Button "Get Recipe"</p>
     </section>
 
     <div class="columns hero-body">
