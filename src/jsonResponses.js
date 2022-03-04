@@ -41,7 +41,7 @@ const addRecipe = (request, response, body) => {
     message: 'Recipe name and date to cook are both required',
   };
     // make sure both fields are filled out in textboxes
-  if (!body.recipe || !body.date || !body.month || !body.recipeDetails) {
+  if (!body.recipe || !body.date || !body.month || !body.recipeDetails || !body.meal) {
     responseJSON.id = 'addRecipeMissingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
